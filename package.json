@@ -1,0 +1,42 @@
+{
+  "name": "pos-system",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\"",
+    "start": "electron .",
+    "build-react": "npm run build --prefix frontend",
+    "package": "electron-builder",
+    "build": "npm run build-react && npm run package"
+  },
+  "build": {
+    "appId": "com.yourapp.possystem",
+    "productName": "POS System",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "frontend/build/**/*",
+      "backend/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "electron": "^25.2.0",
+    "electron-builder": "^23.3.0"
+  }
+}
